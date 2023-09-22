@@ -45,6 +45,7 @@ class FeedData(BaseModel):
     follow: bool
     status: str
     failed_cnt: int
+    sync: bool
 
 
 class ItemData(BaseModel):
@@ -105,7 +106,7 @@ def follow_feed(feed_updates: List[FeedUpdate], user_id: int = Depends(verify_to
 async def get_items_by_feed_id(user_id: int = Depends(verify_token)):
     db = get_session()
     user_feeds = db.query(Feed).filter_by(user_id=user_id).all()
-    return [FeedData(id=feed.id, follow=feed.follow, url=feed.url,
+    return [FeedData(id=feed.id, follow=feed.follow, url=feed.url, sync=feed.sync,
                      status=feed.status, failed_cnt=feed.failed_cnt) for feed in user_feeds]
 
 
@@ -171,7 +172,7 @@ async def set_item_read_unread(item_id: int, user_id: int = Depends(verify_token
             return ItemResponse.item_updated_successfully()
 
 # Running rss scrapping every 1 hour in the app background
-schedule.every(10).seconds.do(scrape_feeds)
+schedule.every(1).hour.do(scrape_feeds)
 
 
 # Function to run the scheduled task
