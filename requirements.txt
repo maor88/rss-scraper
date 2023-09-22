@@ -1,0 +1,11 @@
+SQLAlchemy~=1.4.49
+PyJWT~=2.8.0
+fastapi~=0.103.1
+starlette~=0.27.0
+schedule~=1.2.0
+uvicorn~=0.23.2
+pydantic~=2.3.0
+pytest~=7.4.2
+dramatiq~=1.14.2
+feedparser~=6.0.10
+redis==3.5.3

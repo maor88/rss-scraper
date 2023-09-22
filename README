@@ -1,0 +1,72 @@
+# RSS Scraper - Home Assignment for sendCloud
+
+Author: Maor Avitan
+
+## Overview
+
+RSS Scraper is a FastAPI application that allows you to scrape and manage RSS feeds and their items. This README provides instructions for setting up and running the application locally and inside a Docker container.
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- Python (>= 3.6)
+- Docker (if you want to run the app in a container)
+
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/maoravitan/rss-scraper.git
+   cd rss-scraper
+Create a virtual environment (optional but recommended):
+
+bash
+Copy code
+python -m venv venv
+source venv/bin/activate
+Install the required packages:
+
+bash
+Copy code
+pip install -r requirements.txt
+Configuration
+Copy the sample environment file and customize it as needed:
+
+bash
+Copy code
+cp .env.example .env
+Edit .env to configure your database connection and other settings.
+
+Running the App Locally
+To run the application locally:
+
+bash
+Copy code
+uvicorn main:app --host 0.0.0.0 --port 8000
+You can access the app at http://localhost:8000.
+
+Building and Running in Docker
+To build and run the application inside a Docker container:
+
+Build the Docker image:
+
+bash
+Copy code
+docker build -t rss-scraper .
+Run the Docker container:
+
+bash
+Copy code
+docker run -d -p 8000:80 --name rss-scraper-app rss-scraper
+You can access the app at http://localhost:8000.
+
+API Documentation
+Swagger UI is available at /docs when running the app. You can use it to explore and test the APIs provided by the application.
+
+Author
+Maor Avitan
+Email: maor@example.com
+GitHub: https://github.com/maoravitan
+Enjoy using RSS Scraper!
