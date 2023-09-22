@@ -6,7 +6,7 @@ db module that contains 3 main tables
 2. feeds (id:pk, user_id:fk)
 3. items (id:pk, feed_id:fk)
 
-using sqlalchemy
+using sqlalchemy and sqllite, sendcloud db file attached to app directory
 the tables will create in case are not existing when app starting
 
 Author: Maor Avitan
@@ -48,6 +48,7 @@ class Feed(Base):
     follow = Column(Boolean, default=True)
     failed_cnt = Column(Integer, default=0)
     status = Column(String, default="")
+    sync = Column(Boolean, default=True)
 
 # Define a relationship to the 'items' table
     items = relationship("Item", back_populates="feed")

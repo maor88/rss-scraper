@@ -15,11 +15,13 @@ import feedparser
 
 from db import Feed, Item, get_session
 
+MAX_FAILED_ALLOWED = 3
+
 
 @dramatiq.actor
 def scrape_feeds():
     session = get_session()
-    feeds = session.query(Feed).all()
+    feeds = session.query(Feed).filter_by(sync=True).all()
 
     try:
         for feed in feeds:
@@ -36,6 +38,9 @@ def scrape_feed(feed, db, prevent_duplication: bool = True):
         if parsed_feed.bozo:
             feed.status = "Failed to get feed items"
             feed.failed_cnt += 1
+            if feed.failed_cnt > MAX_FAILED_ALLOWED:
+                feed.sync = False
+                print(f"Feed {feed_url} reached the max failures allowed, it will be no longer synced")
             db.commit()
             raise Exception(parsed_feed.bozo_exception)
 
@@ -54,6 +59,7 @@ def scrape_feed(feed, db, prevent_duplication: bool = True):
                 cnt += 1
                 db.add(item)
         feed.failed_cnt = 0
+        feed.sync = True
         feed.status = ""
         db.commit()
         return cnt

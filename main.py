@@ -171,7 +171,7 @@ async def set_item_read_unread(item_id: int, user_id: int = Depends(verify_token
             return ItemResponse.item_updated_successfully()
 
 # Running rss scrapping every 1 hour in the app background
-schedule.every(1).hour.do(scrape_feeds)
+schedule.every(10).seconds.do(scrape_feeds)
 
 
 # Function to run the scheduled task
