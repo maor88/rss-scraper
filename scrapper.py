@@ -11,6 +11,11 @@ from time import mktime
 
 import dramatiq
 import feedparser
+from dramatiq.brokers.redis import RedisBroker
+
+# Initialize the Redis broker for Dramatiq
+broker = RedisBroker(url="redis://localhost:6379/0")
+dramatiq.set_broker(broker)
 
 
 from db import Feed, Item, get_session
