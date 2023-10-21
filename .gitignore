@@ -1,0 +1,19 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment and virtual environment files
+.env
+.venv
+
+# IDE-specific files
+.idea/
+
+# Compiled Python files
+*.pyc
+
+# Local development files
+db.sqlite3
+
+*.zip
