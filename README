@@ -1,0 +1,50 @@
+# RSS Scraper
+Author: Maor Avitan
+
+## Overview
+
+RSS Scraper is a FastAPI application that allows you to scrape and manage RSS feeds and their items.
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- Python (>= 3.6)
+- Docker (if you want to run the app in a container)
+
+## Installation
+
+1. To run the application locally:
+
+   ```bash
+   uvicorn main:app --host 0.0.0.0 --port 8080
+
+2. Building and Running in Docker
+
+    ```bash
+    docker build -t rss-scraper .
+    docker run -d -p 8000:80 --name rss-scraper-app rss-scraper
+
+## Interacting with server and Authentications
+1. first must run /login/ post api with json:
+    ```bash
+    {
+       "email": "user2@sendcloud.com"
+    }
+
+2. the server will return a token,
+3. for each api call please add to header as Bearer token and the token value
+
+
+## Running Tests
+
+    pytest tests.py
+
+
+## API Documentation
+For api docs using Swagger: http://localhost:8080/docs#/
+You can use it to explore and test the APIs provided by the application.
+
+
+## HLD
+https://docs.google.com/document/d/15V459ExaVxqJlZ7UPouLinqrTuoSA457/edit?usp=sharing&ouid=114747014390996929144&rtpof=true&sd=true
